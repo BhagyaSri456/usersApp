@@ -13,7 +13,7 @@ const AppRouter = (props) => (
     <HashRouter {...props}>
         <div>
             <Switch>
-                {/* <Route path="/" exact><Redirect to="/dashboard" /></Route> */}
+                <Route path="/" exact><Redirect to="/login" /></Route>
                 <PublicRoute path="/login" component={LoginPage} />
                 <PrivateRoute path="/dashboard" component={Dashboard} />
                 <PublicRoute path="/register" component={Register} />
