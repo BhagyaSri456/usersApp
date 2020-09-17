@@ -12,30 +12,23 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
+
+        case "REGISTER_SUCCESS":
+        case "REGISTER_FAIL":
         case "SET_LOGIN_STATE": {
             return {
                 ...state,
                 ...action.payload,
             }
         }
+
         case "LOGIN_FAIL": {
             return {
                 ...state,
                 authError: action.authError
             }
         }
-        case "REGISTER_SUCCESS": {
-            return {
-                ...state,
-                ...action.payload
-            }
-        }
-        case "REGISTER_FAIL": {
-            return {
-                ...state,
-                ...action.payload
-            }
-        }
+
         case "LOAD_USERS": {
             return {
                 ...state,
@@ -53,18 +46,14 @@ export default (state = initialState, action) => {
                 viewUser: action.userData
             }
         }
+        case "NEXT_PAGE":
         case "PREV_PAGE": {
             return {
                 ...state,
                 page: action.page
             }
         }
-        case "NEXT_PAGE": {
-            return {
-                ...state,
-                page: action.page
-            }
-        }
+
         case 'LOGOUT': {
             return {
                 ...initialState

@@ -32,6 +32,7 @@ export class UserDetails extends Component {
     }
     render() {
         const { avatar: profilePic, first_name, last_name, email } = this.props.userData;
+        if (!this.props.userData) return (<div className="user-details font-weight-bold">Loading...</div>);
         return (
             <div className="user-details">
                 <img src={profilePic} width="180" height="180" />
