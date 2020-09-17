@@ -1,0 +1,48 @@
+.dashboard-wrapper {
+    width : 70%;
+    margin: auto;
+
+    h3 {
+        color: #045d75;
+    }
+
+    .buttons-wrapper {
+        text-align: right;
+        padding   : 0.5rem;
+
+        button {
+            margin     : 0.5rem;
+            border     : 1px solid;
+            font-weight: bolder;
+
+            
+        }
+    }
+}
+
+#userTable {
+    font-size      : 16px;
+    font-family    : "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border-spacing : 0;
+    margin         : auto;
+    border         : 1px solid #ddd;
+    height         : 290px;
+
+    thead {
+        background: #17a2b8;
+        color     : #fff;
+    }
+
+    th {
+        padding-top   : 11px;
+        padding-bottom: 11px;
+    }
+
+    th,
+    td {
+        border-bottom: 1px solid #ddd;
+        text-align   : left;
+        padding      : 8px;
+    }
+}

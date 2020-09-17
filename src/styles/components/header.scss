@@ -1,0 +1,30 @@
+.header {
+    background     : #006580;
+    justify-content: space-between;
+
+    .project-name {
+        color      : #fff;
+        font-weight: bolder;
+        font-size  : x-large;
+        margin     : 0.5rem 0 0.5rem 1.5rem;
+    }
+
+    .user-wrapper {
+        display       : flex;
+        flex-direction: column;
+
+        span {
+            margin: 0.2rem 0.5rem 0 0;
+            color : #fff;
+        }
+    }
+
+    button {
+        color    : #fff;
+        font-size: small;
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
