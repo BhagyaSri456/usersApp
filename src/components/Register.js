@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import Input from './InputComponent';
 import { useDispatch, useSelector } from 'react-redux';
-import { registration, logout } from '../actions/userDetailsActions';
+import { userRegister, logout } from '../actions/userDetailsActions';
 
 const Register = (props) => {
     const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const Register = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         e.persist();
-        dispatch(registration({ email, password }));
+        dispatch(userRegister({ email, password }));
     }
 
     if (status) return <Redirect to="/login" />

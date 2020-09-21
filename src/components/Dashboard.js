@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { GetUsers, prevPage, nextPage } from '../actions/userDetailsActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUsers, prevPage, nextPage } from '../actions/userDetailsActions';
 
-export class Dashboard extends React.Component {
-    componentDidMount() {
-        this.props.GetUsers();
+const Dashboard = (props) => {
+    const dispatch = useDispatch();
+    const { page, users: usersList, totalPages } = useSelector(state => state);
+    useEffect(() => {
+        dispatch(getUsers());
+    }, []);
+
+    const handlePrevPage = () => {
+        dispatch(prevPage(page));
+        dispatch(getUsers());
     }
-    prevPage = () => {
-        this.props.prevPage(this.props.page);
-        this.props.GetUsers();
-    }
-    nextPage = () => {
-        this.props.nextPage(this.props.page);
-        this.props.GetUsers();
+    const handleNextPage = () => {
+        dispatch(nextPage(page));
+        dispatch(getUsers());
     }
 
-    renderUsersData = () => {
-        if (this.props.usersList.length <= 0) return (<tr><td colSpan="3" className="text-center">No data Found</td></tr>)
-        return this.props.usersList.map((user, index) => {
+    const renderUsersData = () => {
+        if (usersList.length <= 0) return (<tr><td colSpan="3" className="text-center">No data Found</td></tr>)
+        return usersList.map((user, index) => {
             const { email, first_name, last_name, id } = user;
             return (
                 <tr key={id}>
@@ -29,43 +32,31 @@ export class Dashboard extends React.Component {
             )
         })
     }
-    render() {
-        return (
-            <div className="dashboard-wrapper">
-                <h3 className="text-center m-2">Dashboard</h3>
-                <table id="userTable" className="table">
-                    <thead>
-                        <tr>
-                            <th>Email</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.renderUsersData()}
-                    </tbody>
-                </table>
-                <div className="buttons-wrapper">
-                    <button onClick={this.prevPage} disabled={!this.props.page}>&lt;</button>
-                    <span>{this.props.page}</span>
-                    <button onClick={this.nextPage}
-                        disabled={this.props.usersList.length <= 0}
-                    >&gt;</button>
-                </div>
-            </div>
-        )
-    }
-}
-const mapStateToProps = (state) => {
-    return {
-        usersList: state.users,
-        page: state.page
-    }
-}
-const mapDispatchToProps = (dispatch) => ({
-    GetUsers: (page) => dispatch(GetUsers(page)),
-    prevPage: (page) => dispatch(prevPage(page)),
-    nextPage: (page) => dispatch(nextPage(page))
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+    return (
+        <div className="dashboard-wrapper">
+            <h3 className="text-center m-2">Dashboard</h3>
+            <table id="userTable" className="table">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {renderUsersData()}
+                </tbody>
+            </table>
+            <div className="buttons-wrapper">
+                <button onClick={handlePrevPage} disabled={page <= 1}>&lt;</button>
+                <span>{page}</span>
+                <button onClick={handleNextPage}
+                    disabled={page >= totalPages}
+                >&gt;</button>
+            </div>
+        </div>
+    )
+}
+
+export default Dashboard;

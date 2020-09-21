@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import Input from './InputComponent';
-import { startLogin, logout } from "../actions/userDetailsActions";
+import { userFetch, logout } from "../actions/userDetailsActions";
 
 
 const LoginPage = (props) => {
@@ -20,7 +20,7 @@ const LoginPage = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         e.persist();
-        dispatch(startLogin({ email, password }));
+        dispatch(userFetch({ email, password }));
     }
 
     return (

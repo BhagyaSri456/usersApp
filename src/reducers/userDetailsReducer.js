@@ -7,7 +7,8 @@ const initialState = {
     info: '',
     status: false,
     page: 1,
-    email: ''
+    email: '',
+    totalPages: 0
 };
 
 export default (state = initialState, action) => {
@@ -53,6 +54,14 @@ export default (state = initialState, action) => {
                 page: action.page
             }
         }
+
+        case "TOTAL_PAGES": {
+            return {
+                ...state,
+                totalPages: action.totalPages
+            }
+        }
+
 
         case 'LOGOUT': {
             return {
