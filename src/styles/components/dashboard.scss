@@ -2,21 +2,21 @@
     width : 70%;
     margin: auto;
 
-    @media (max-width: 768px) {
+    @media (max-width: $tablet-breakpoint) {
         width  : 100%;
-        padding: 10px;
+        padding: $s-size;
     }
 
     h3 {
-        color: #045d75;
+        color: $light-teal;
     }
 
     .buttons-wrapper {
         text-align: right;
-        padding   : 0.5rem;
+        padding   : $xs-size;
 
         button {
-            margin     : 0.5rem;
+            margin     : $xs-size;
             border     : 1px solid;
             font-weight: bolder;
 
@@ -26,7 +26,7 @@
 }
 
 #userTable {
-    font-size      : 16px;
+    font-size      : 1rem;
     font-family    : "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     border-spacing : 0;
@@ -35,19 +35,14 @@
     height         : 290px;
 
     thead {
-        background: #17a2b8;
-        color     : #fff;
-    }
-
-    th {
-        padding-top   : 11px;
-        padding-bottom: 11px;
+        background: $light-blue;
+        color     : $white;
     }
 
     th,
     td {
         border-bottom: 1px solid #ddd;
         text-align   : left;
-        padding      : 8px;
+        padding      : 0.5rem;
     }
 }

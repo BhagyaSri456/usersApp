@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { GetUsers, prevPage, nextPage } from '../actions/userDetails';
+import { GetUsers, prevPage, nextPage } from '../actions/userDetailsActions';
 
 export class Dashboard extends React.Component {
     componentDidMount() {
@@ -46,10 +46,10 @@ export class Dashboard extends React.Component {
                     </tbody>
                 </table>
                 <div className="buttons-wrapper">
-                    <button onClick={this.prevPage} disabled={this.props.page > 1 ? false : true}>&lt;</button>
+                    <button onClick={this.prevPage} disabled={!this.props.page}>&lt;</button>
                     <span>{this.props.page}</span>
                     <button onClick={this.nextPage}
-                        disabled={this.props.usersList.length <= 0 ? true : false}
+                        disabled={this.props.usersList.length <= 0}
                     >&gt;</button>
                 </div>
             </div>

@@ -1,15 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getUserDetails, deleteUserData } from '../actions/userDetails';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserDetails, deleteUserData } from '../actions/userDetailsActions';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
-export class UserDetails extends Component {
-    componentDidMount() {
-        const id = parseInt(this.props.match.params.id);
-        this.props.getUserDetails(id);
-    }
-    handleDelete = () => {
+const UserDetails = (props) => {
+    const dispatch = useDispatch();
+    const { viewUser } = useSelector(state => state);
+    const { avatar: profilePic, first_name, last_name, email } = viewUser;
+
+    useEffect(() => {
+        const id = parseInt(props.match.params.id);
+        dispatch(getUserDetails(id));
+    }, []);
+
+    const handleDelete = () => {
         confirmAlert({
             title: 'Confirm to delete',
             message: 'Do you want to delete this user details?',
@@ -17,9 +23,9 @@ export class UserDetails extends Component {
                 {
                     label: 'Yes',
                     onClick: () => {
-                        const id = parseInt(this.props.match.params.id);
-                        this.props.deleteUserData(id);
-                        this.props.history.push('/dashboard');
+                        const id = parseInt(props.match.params.id);
+                        dispatch(deleteUserData(id));
+                        props.history.push('/dashboard');
                     }
                 },
                 {
@@ -30,25 +36,22 @@ export class UserDetails extends Component {
         });
 
     }
-    render() {
-        const { avatar: profilePic, first_name, last_name, email } = this.props.userData;
-        if (!this.props.userData) return (<div className="user-details font-weight-bold">Loading...</div>);
-        return (
+
+    if (!viewUser) return (<div className="user-details font-weight-bold">Loading...</div>);
+    return (
+        <div>
+            <button className="btn btn-link">
+                <Link to="/dashboard">Go to Dashboard</Link>
+            </button>
             <div className="user-details">
                 <img src={profilePic} width="180" height="180" />
                 <div className="user-email">{email}</div>
                 <div className="user-name">{`${first_name}${last_name}`}</div>
-                <button className="btn btn-outline-danger" onClick={this.handleDelete}>Delete</button>
+                <button className="btn btn-outline-danger" onClick={handleDelete}>Delete</button>
             </div>
-        );
-    }
+        </div>
+    );
 }
-const mapStateToProps = (state) => {
-    return { userData: state.viewUser }
-}
-const mapDispatchToProps = (dispatch) => ({
-    getUserDetails: (userData) => dispatch(getUserDetails(userData)),
-    deleteUserData: (id) => dispatch(deleteUserData(id))
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserDetails);
+export default UserDetails;
+

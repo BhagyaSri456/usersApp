@@ -1,12 +1,12 @@
 .header {
-    background     : #006580;
+    background     : $teal;
     justify-content: space-between;
 
     .project-name {
-        color      : #fff;
+        color      : $white;
         font-weight: bolder;
         font-size  : x-large;
-        margin     : 0.5rem 0 0.5rem 1.5rem;
+        margin     : $xs-size 0 $xs-size $m-size;
     }
 
     .user-wrapper {
@@ -14,13 +14,13 @@
         flex-direction: column;
 
         span {
-            margin: 0.2rem 0.5rem 0 0;
-            color : #fff;
+            margin: 0.2rem $xs-size 0 0;
+            color : $white;
         }
     }
 
     button {
-        color    : #fff;
+        color    : $white;
         font-size: small;
 
         &:focus {
